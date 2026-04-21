@@ -1,0 +1,676 @@
+/* SiteScanner - Minimal Design with Cinzel Font */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    background: #f5f5f5;
+    color: #333;
+    width: 550px;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    padding: 0;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    border-radius: 16px;
+}
+
+/* Results action controls */
+.results-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 12px 30px;
+}
+.save-toggle {
+    font-size: 13px;
+    color: #444;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.export-btn {
+    background: #111;
+    color: #fff;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+}
+.export-btn:hover { opacity: 0.9; }
+
+/* Header */
+header {
+    padding: 30px 30px;
+    border-bottom: 1px solid #eee;
+    background: linear-gradient(180deg, #fafafa 0%, #fff 100%);
+    border-radius: 16px 16px 0 0;
+}
+
+header h1 {
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: #000;
+    margin-bottom: 6px;
+}
+
+header .subtitle {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: #888;
+    text-transform: uppercase;
+}
+
+/* Main Content */
+main {
+    flex: 1;
+    padding: 30px 30px;
+}
+
+/* Scan Section */
+.scan-section {
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.scan-button {
+    width: 100%;
+    max-width: 280px;
+    padding: 16px 32px;
+    background: #000;
+    color: white;
+    border: 2px solid #000;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.scan-button:hover {
+    background: #222;
+    border-color: #222;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.scan-button:active {
+    transform: scale(0.98);
+}
+
+.scanning {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 30px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #eee;
+    border-top: 2px solid #000;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.scanning p {
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #666;
+}
+
+.progress-container {
+    width: 100%;
+    max-width: 250px;
+    margin-top: 10px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #000 0%, #333 100%);
+    border-radius: 10px;
+    width: 0%;
+    transition: width 0.2s ease;
+}
+
+.progress-text {
+    text-align: center;
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #000;
+    letter-spacing: 0.5px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Results Summary */
+.results {
+    margin-bottom: 30px;
+}
+
+.summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.stat {
+    text-align: center;
+    padding: 20px 15px;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.stat:hover {
+    border-color: #000;
+}
+
+.stat.critical {
+    border-color: #dc3545;
+}
+
+.stat.high {
+    border-color: #ff8c00;
+}
+
+.stat.medium {
+    border-color: #ffc107;
+}
+
+.stat .count {
+    display: block;
+    font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 8px;
+}
+
+.stat.critical .count {
+    color: #dc3545;
+}
+
+.stat.high .count {
+    color: #ff8c00;
+}
+
+.stat.medium .count {
+    color: #ffc107;
+}
+
+.stat .label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #666;
+    font-weight: 600;
+}
+
+/* Vulnerabilities List */
+.vulnerabilities-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.vulnerability-item {
+    padding: 0;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-left: 4px solid #999;
+    overflow: hidden;
+}
+
+.vulnerability-item:hover {
+    background: #f9f9f9;
+    border-left-color: #000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.vulnerability-item.critical {
+    border-left-color: #dc3545;
+}
+
+.vulnerability-item.high {
+    border-left-color: #ff8c00;
+}
+
+.vulnerability-item.medium {
+    border-left-color: #ffc107;
+}
+
+.vuln-header {
+    padding: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.vuln-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.vuln-severity {
+    width: 65px;
+    padding: 3px 6px;
+    border-radius: 8px;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.vuln-severity.critical {
+    background: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+    border: 1px solid #dc3545;
+}
+
+.vuln-severity.high {
+    background: rgba(255, 140, 0, 0.1);
+    color: #ff8c00;
+    border: 1px solid #ff8c00;
+}
+
+.vuln-severity.medium {
+    background: rgba(255, 193, 7, 0.1);
+    color: #ffc107;
+    border: 1px solid #ffc107;
+}
+
+.vuln-desc {
+    font-size: 11px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.vuln-toggle {
+    font-size: 12px;
+    color: #999;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    margin-top: 2px;
+}
+
+.vuln-details {
+    max-height: 600px;
+    overflow-y: auto;
+    border-top: 1px solid #e0e0e0;
+    background: #f9f9f9;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        max-height: 0;
+    }
+    to {
+        opacity: 1;
+        max-height: 600px;
+    }
+}
+
+.vuln-details.hidden {
+    display: none;
+}
+
+.vuln-detail-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.vuln-details .detail-section {
+    margin-bottom: 0;
+}
+
+.vuln-details .detail-section h4 {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #000;
+    margin-bottom: 8px;
+    opacity: 0.8;
+}
+
+.vuln-details .detail-section p {
+    font-size: 11px;
+    color: #555;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.vuln-details .cvss-score {
+    font-weight: 700;
+    font-size: 13px;
+    color: #000;
+}
+
+/* No Vulnerabilities */
+.no-vulns {
+    text-align: center;
+    padding: 40px 30px;
+}
+
+.success-message {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: #27ae60;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 20px;
+    max-width: 500px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 30px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    border: 1px solid #eee;
+    background: white;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+}
+
+.modal-close:hover {
+    background: #f5f5f5;
+    border-color: #000;
+}
+
+.modal-content h2 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+    margin-top: 16px;
+}
+
+.severity-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.severity-badge.critical {
+    background: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+    border: 1px solid #dc3545;
+}
+
+.severity-badge.high {
+    background: rgba(255, 140, 0, 0.1);
+    color: #ff8c00;
+    border: 1px solid #ff8c00;
+}
+
+.severity-badge.medium {
+    background: rgba(255, 193, 7, 0.1);
+    color: #ffc107;
+    border: 1px solid #ffc107;
+}
+
+.modal-body {
+    line-height: 1.8;
+}
+
+.detail-group {
+    margin-bottom: 20px;
+}
+
+.detail-group h3 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #000;
+    margin-bottom: 8px;
+}
+
+.detail-group p {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.6;
+}
+
+.vulnerable-points {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.vuln-point {
+    padding: 12px;
+    background: #f8f8f8;
+    border-left: 3px solid #dc3545;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #333;
+    line-height: 1.5;
+}
+
+.vuln-point-label {
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 4px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.vuln-point-detail {
+    font-size: 11px;
+    color: #666;
+    margin-top: 4px;
+}
+
+.cvss-score {
+    font-weight: 700;
+    font-size: 16px;
+    color: #000;
+}
+
+/* Footer */
+footer {
+    padding: 20px 30px;
+    border-top: 1px solid #eee;
+    background: linear-gradient(180deg, #fff 0%, #fafafa 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    border-radius: 0 0 16px 16px;
+}
+
+.footer-link {
+    text-decoration: none;
+    color: #000;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #666;
+}
+
+.divider {
+    color: #ccc;
+    font-weight: 300;
+}
+
+/* Footer actions and branding */
+.footer-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.branding {
+    flex: 1;
+}
+.footer-btn {
+    background: transparent;
+    border: 1px solid #111;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 12px;
+}
+.footer-btn:hover { background: #f0f0f0; }
+
+/* Details log */
+.details-log {
+    background: #111;
+    color: #e6e6e6;
+    padding: 12px;
+    border-radius: 8px;
+    max-height: 50vh;
+    overflow: auto;
+    font-family: monospace;
+    font-size: 12px;
+    white-space: pre-wrap;
+}
+
+/* Past scans list */
+.past-scans-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.past-scan-item {
+    border: 1px solid #eee;
+    padding: 10px;
+    border-radius: 8px;
+    background: #fafafa;
+}
+.past-scan-item .meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+}
+.past-scan-item .details {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #333;
+    white-space: pre-wrap;
+}
+.hidden { display: none !important; }
+
+/* Responsive */
+@media (max-width: 600px) {
+    header {
+        padding: 25px 30px;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    main {
+        padding: 25px 30px;
+    }
+
+    .summary {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .stat {
+        padding: 20px;
+    }
+}

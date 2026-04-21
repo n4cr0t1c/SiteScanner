@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SiteScanner</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SiteScanner</h1>
+            <p class="subtitle">Vulnerability Detection</p>
+        </header>
+
+        <main>
+            <section class="scan-section">
+                <button id="scanBtn" class="scan-button">SCAN WEBSITE</button>
+                <div id="scanning" class="scanning hidden">
+                    <div class="spinner"></div>
+                    <p>Scanning...</p>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span id="progressPercent">0</span>%
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="results" class="results hidden">
+                <div class="results-actions">
+                    <label class="save-toggle"><input type="checkbox" id="saveToggle"> Save scan</label>
+                    <button id="exportJson" class="export-btn">Export JSON</button>
+                    <button id="exportPdf" class="export-btn">Export PDF</button>
+                </div>
+                <div class="summary">
+                    <div class="stat critical">
+                        <span class="count" id="criticalCount">0</span>
+                        <span class="label">CRITICAL</span>
+                    </div>
+                    <div class="stat high">
+                        <span class="count" id="highCount">0</span>
+                        <span class="label">HIGH</span>
+                    </div>
+                    <div class="stat medium">
+                        <span class="count" id="mediumCount">0</span>
+                        <span class="label">MEDIUM</span>
+                    </div>
+                </div>
+
+                <div class="vulnerabilities-list" id="vulnerabilitiesList">
+                    <!-- Dynamic vulnerabilities -->
+                </div>
+            </section>
+
+            <section id="noVulnerabilities" class="no-vulns hidden">
+                <div class="success-message">
+                    <p>✓ No Vulnerabilities Found</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="branding">
+                <a href="https://github.com/n4cr0t1c" class="footer-link" target="_blank" rel="noopener">GitHub: n4cr0t1c</a>
+            </div>
+            <div class="footer-actions">
+                <button id="detailsBtn" class="footer-btn">Details</button>
+                <span class="divider">—</span>
+                <button id="pastScansBtn" class="footer-btn">Past Scans</button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Vulnerability Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <h2 id="modalTitle"></h2>
+            <div class="severity-badge" id="modalSeverity"></div>
+            <div class="modal-body">
+                <div class="detail-group">
+                    <h3>Description</h3>
+                    <p id="modalDescription"></p>
+                </div>
+                <div class="detail-group">
+                    <h3>Vulnerable Points</h3>
+                    <div id="vulnerablePoints" class="vulnerable-points">
+                        <!-- Dynamic vulnerable points -->
+                    </div>
+                </div>
+                <div class="detail-group">
+                    <h3>Impact</h3>
+                    <p id="modalImpact"></p>
+                </div>
+                <div class="detail-group">
+                    <h3>Mitigation</h3>
+                    <p id="modalSuggestion"></p>
+                </div>
+                <div class="detail-group">
+                    <h3>CVSS Score</h3>
+                    <p id="modalCVSS" class="cvss-score"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Details Modal -->
+    <div id="detailsModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close details-close">&times;</button>
+            <h2>Scan Details</h2>
+            <div class="modal-body">
+                <pre id="detailsLog" class="details-log"></pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Past Scans Modal -->
+    <div id="pastScansModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close past-close">&times;</button>
+            <h2>Past Scans</h2>
+            <div class="modal-body">
+                <div id="pastScansList" class="past-scans-list"></div>
+                <div class="past-actions" style="margin-top:12px;">
+                    <button id="clearHistory" class="export-btn">Clear History</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="vulnerabilities.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html>
